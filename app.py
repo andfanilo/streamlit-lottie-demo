@@ -18,7 +18,7 @@ def load_lottieurl(url: str):
     return r.json()
 
 
-lottie_bodymovin = load_lottiefile("./lottiefiles/16-body-movin.json")
+lottie_streamlit = load_lottiefile("./lottiefiles/Streamlit Logo Animation.json")
 lottie_progress = load_lottiefile("./lottiefiles/117-progress-bar.json")
 lottie_success = load_lottiefile("./lottiefiles/26514-check-success-animation.json")
 lottie_error = load_lottiefile("./lottiefiles/38463-error.json")
@@ -37,7 +37,7 @@ st.header("Infinite loop")
 with st.beta_expander("Animation parameters"):
     speed = st.slider("Select speed", 0.1, 2.0, 1.0)
     reverse = st.checkbox("Reverse direction", False)
-st_lottie(lottie_bodymovin, speed=speed, reverse=reverse, height=200, key="initial")
+st_lottie(lottie_streamlit, speed=speed, reverse=reverse, height=400, key="initial")
 
 st.header("Context manager")
 
