@@ -24,6 +24,8 @@ lottie_progress = load_lottiefile("./lottiefiles/44327-animated-rocket-icon.json
 lottie_success = load_lottiefile("./lottiefiles/26514-check-success-animation.json")
 lottie_error = load_lottiefile("./lottiefiles/38463-error.json")
 
+st.set_page_config(page_title="Streamlit Lottie Demo", page_icon=":tada:", initial_sidebar_state='collapsed')
+
 st.title("Hello Lottie!")
 st.markdown(
     """
@@ -34,13 +36,12 @@ Go look at the [awesome animations](https://lottiefiles.com/) to spice your Stre
 """
 )
 
-st.header("Infinite loop")
-with st.beta_expander("Animation parameters"):
+with st.sidebar:
+    st.header("Animation parameters")
     speed = st.slider("Select speed", 0.1, 2.0, 1.0)
     reverse = st.checkbox("Reverse direction", False)
 st_lottie(lottie_streamlit, speed=speed, reverse=reverse, height=400, key="initial")
 
-st.header("Run a small animation during a long computation")
 c_col1, colx, c_col2, coly = st.beta_columns((1, 0.1, 0.25, 1))
 if c_col1.button("Run some heavy computation...for 5 seconds!"):
     with c_col2.empty():
@@ -48,6 +49,7 @@ if c_col1.button("Run some heavy computation...for 5 seconds!"):
         time.sleep(5)
         st_lottie(lottie_success, loop=False, key="success")
 
+st.markdown("---")
 st.header("Try it yourself!")
 st.markdown(
     "Choose a Lottie from [the website](https://lottiefiles.com/) and paste its 'Lottie Animation URL'"
