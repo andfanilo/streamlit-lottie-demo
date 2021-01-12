@@ -1,4 +1,5 @@
 import json
+from logging import PlaceHolder
 import time
 
 import requests
@@ -19,7 +20,7 @@ def load_lottieurl(url: str):
 
 
 lottie_streamlit = load_lottiefile("./lottiefiles/Streamlit Logo Animation.json")
-lottie_progress = load_lottiefile("./lottiefiles/117-progress-bar.json")
+lottie_progress = load_lottiefile("./lottiefiles/44327-animated-rocket-icon.json")
 lottie_success = load_lottiefile("./lottiefiles/26514-check-success-animation.json")
 lottie_error = load_lottiefile("./lottiefiles/38463-error.json")
 
@@ -39,12 +40,12 @@ with st.beta_expander("Animation parameters"):
     reverse = st.checkbox("Reverse direction", False)
 st_lottie(lottie_streamlit, speed=speed, reverse=reverse, height=400, key="initial")
 
-st.header("Context manager")
-
+st.header("Run a small animation during a long computation")
 c_col1, colx, c_col2, coly = st.beta_columns((1, 0.1, 0.25, 1))
 if c_col1.button("Run some heavy computation...for 5 seconds!"):
-    time.sleep(5)
-    with c_col2:
+    with c_col2.empty():
+        st_lottie(lottie_progress, loop=True, key="progress")
+        time.sleep(5)
         st_lottie(lottie_success, loop=False, key="success")
 
 st.header("Try it yourself!")
