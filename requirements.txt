@@ -1,2 +1,2 @@
 streamlit>=0.69
-streamlit-lottie
+streamlit-lottie>=0.0.3

@@ -1,10 +1,10 @@
 import json
-from logging import PlaceHolder
 import time
 
 import requests
 import streamlit as st
 from streamlit_lottie import st_lottie
+from streamlit_lottie import st_lottie_spinner
 
 
 def load_lottiefile(filepath: str):
@@ -53,11 +53,11 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-c_col1, colx, c_col2, coly = st.beta_columns((1, 0.1, 0.25, 1))
+c_col1, colx, c_col2, coly = st.columns((1, 0.1, 0.25, 1))
 if c_col1.button("Run some heavy computation...for 5 seconds!"):
     with c_col2.empty():
-        st_lottie(lottie_progress, loop=True, key="progress")
-        time.sleep(5)
+        with st_lottie_spinner(lottie_progress, loop=True, key="progress"):
+            time.sleep(5)
         st_lottie(lottie_success, loop=False, key="success")
 
 st.markdown("---")
@@ -71,7 +71,7 @@ lottie_url = st.text_input(
 downloaded_url = load_lottieurl(lottie_url)
 
 if downloaded_url is None:
-    col1, col2 = st.beta_columns((2, 1))
+    col1, col2 = st.columns((2, 1))
     col1.warning(f"URL {lottie_url} does not seem like a valid lottie JSON file")
     with col2:
         st_lottie(lottie_error, height=100, key="error")
